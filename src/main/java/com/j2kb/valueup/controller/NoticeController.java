@@ -1,7 +1,6 @@
 package com.j2kb.valueup.controller;
 
 
-import com.j2kb.valueup.MD5Generator;
 import com.j2kb.valueup.domain.Image.FileRequestDTO;
 import com.j2kb.valueup.domain.Notice.Notice;
 import com.j2kb.valueup.domain.Notice.NoticeRequestDTO;
@@ -24,25 +23,28 @@ public class NoticeController {
 
     // 공고 등록
     @PostMapping("/notice")
-    public String save(@RequestParam(value="file", required = false)List<MultipartFile> files, final NoticeRequestDTO params){
+    public Notice save(@RequestParam(value="file", required = false)List<MultipartFile> files, final NoticeRequestDTO params) {
+        Notice notice = null;
 
         try {
-            Notice notice = noticeService.save(params);
+            notice = noticeService.save(params);
 
-            for(MultipartFile multipartFile : files){
-                String filename = multipartFile.getOriginalFilename();
-                /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
-                String savePath = System.getProperty("user.dir") + "\\files";
-                /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
-                if (!new File(savePath).exists()) {
-                    try{
-                        new File(savePath).mkdir();
-                    }
-                    catch(Exception e){
-                        e.getStackTrace();
-                    }
+            /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
+            String savePath = System.getProperty("user.dir") + "/src/main/resources/images";
+            /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
+            File file = new File(savePath);
+
+            if (!file.exists()) {
+                try {
+                    file.mkdir();
+                } catch (Exception e) {
+                    e.getStackTrace();
                 }
-                String filePath = savePath + "\\" + filename;
+            }
+
+            for (MultipartFile multipartFile : files) {
+                String filename = multipartFile.getOriginalFilename();
+                String filePath = savePath + "/" + filename;
                 multipartFile.transferTo(new File(filePath));
 
                 FileRequestDTO fileDto = new FileRequestDTO();
@@ -52,30 +54,31 @@ public class NoticeController {
 
                 fileService.saveFile(fileDto);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return "success";
+
+        return notice;
     }
 
     // 공고 조회
-    @GetMapping("notice")
+    @GetMapping("/notice")
     public List<NoticeResponseDTO> findAll(){
         return noticeService.findAll();
     }
 
-    @GetMapping("notice/{no}")
+    @GetMapping("/notice/{no}")
     public NoticeResponseDTO findById(@PathVariable Long no){
         return noticeService.findById(no);
     }
 
     // 공고 수정
-    @PatchMapping("notice/{no}")
+    @PatchMapping("/notice/{no}")
     public Long save(@PathVariable final Long no, @RequestBody final NoticeRequestDTO params){
         return noticeService.update(no,params);
     }
 
-    @DeleteMapping("notice/{no}")
+    @DeleteMapping("/notice/{no}")
     public Long delete(@PathVariable final Long no){
         noticeService.delete(no);
         return no;
