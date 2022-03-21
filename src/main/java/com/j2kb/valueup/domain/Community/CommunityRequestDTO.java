@@ -21,7 +21,6 @@ public class CommunityRequestDTO {
                 .content(content)
                 .writer(writer)
                 .category(category)
-                .deleteYn(deleteYn)
                 .createdDate(createDate)
                 .build();
     }

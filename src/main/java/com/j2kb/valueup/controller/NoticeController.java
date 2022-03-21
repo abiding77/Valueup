@@ -29,9 +29,9 @@ public class NoticeController {
         try {
             notice = noticeService.save(params);
 
-            /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
+            // images 폴더에 파일 저장
             String savePath = System.getProperty("user.dir") + "/src/main/resources/images";
-            /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
+            // 폴더가 없으면 폴더 생성
             File file = new File(savePath);
 
             if (!file.exists()) {

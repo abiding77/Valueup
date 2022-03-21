@@ -6,7 +6,6 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Builder
@@ -22,7 +21,6 @@ public class Community {
     private String writer;
     @ColumnDefault("0")
     private int view;
-    private char deleteYn;
     private LocalDateTime createdDate = LocalDateTime.now();
     private LocalDateTime modifiedDate;
     private String category;
