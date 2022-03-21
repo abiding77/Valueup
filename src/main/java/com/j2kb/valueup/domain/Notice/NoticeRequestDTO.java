@@ -23,6 +23,8 @@ public class NoticeRequestDTO {
     private LocalDateTime createdDate = LocalDateTime.now();
     private LocalDateTime modifiedDate;
     private String category;
+    private String types;
+    private int people;
 
     public Notice toEntity(){
         return Notice.builder()
@@ -36,6 +38,8 @@ public class NoticeRequestDTO {
                 .websiteurl(websiteurl)
                 .createdDate(createdDate)
                 .category(category)
+                .types(types)
+                .people(people)
                 .build();
     }
 }

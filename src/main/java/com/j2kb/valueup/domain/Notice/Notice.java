@@ -33,6 +33,10 @@ public class Notice {
     private LocalDateTime createdDate = LocalDateTime.now();
     private LocalDateTime modifiedDate;
     private String category;
+    @ColumnDefault("0")
+    private int heart;
+    private String types;
+    private int people;
 
     public void update(String name,String content, String recruit, String active, String company, String target, String area, String websiteurl, String category){
         this.name= name;
