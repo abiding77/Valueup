@@ -2,6 +2,7 @@ package com.j2kb.valueup.controller;
 
 
 import com.j2kb.valueup.domain.Image.FileRequestDTO;
+import com.j2kb.valueup.domain.Image.FileResponseDTO;
 import com.j2kb.valueup.domain.Notice.Notice;
 import com.j2kb.valueup.domain.Notice.NoticeRequestDTO;
 import com.j2kb.valueup.domain.Notice.NoticeResponseDTO;
@@ -66,6 +67,7 @@ public class NoticeController {
     public List<NoticeResponseDTO> findAll(){
         return noticeService.findAll();
     }
+
 
     @GetMapping("/notice/{no}")
     public NoticeResponseDTO findById(@PathVariable Long no){

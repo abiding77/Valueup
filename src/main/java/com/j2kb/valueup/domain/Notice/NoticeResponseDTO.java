@@ -1,9 +1,14 @@
 package com.j2kb.valueup.domain.Notice;
 
 
+import com.j2kb.valueup.domain.Image.File;
 import lombok.Getter;
+import lombok.ToString;
 
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Getter
 public class NoticeResponseDTO {
@@ -20,7 +25,12 @@ public class NoticeResponseDTO {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
     private String category;
-
+    private int heart;
+    private String types;
+    private int people;
+//    @OneToMany(mappedBy = "notice", fetch = FetchType.EAGER)
+//    @ToString.Exclude
+//    private Collection<File> fileinfo;
     public NoticeResponseDTO(Notice entity) {
         this.no = entity.getNo();
         this.name = entity.getName();
@@ -35,5 +45,8 @@ public class NoticeResponseDTO {
         this.createdDate = entity.getCreatedDate();
         this.modifiedDate = entity.getModifiedDate();
         this.category = entity.getCategory();
+        this.heart = entity.getHeart();
+        this.types = entity.getTypes();
+        this.people = entity.getPeople();
     }
 }

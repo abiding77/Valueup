@@ -16,8 +16,9 @@ public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="notice_no")
+    @ToString.Exclude
     private Notice notice;
     private String file_name;
     private String save_path;

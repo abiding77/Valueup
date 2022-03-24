@@ -1,14 +1,14 @@
 package com.j2kb.valueup.domain.Notice;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.j2kb.valueup.domain.Image.File;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Builder
@@ -37,7 +37,9 @@ public class Notice {
     private int heart;
     private String types;
     private int people;
-
+//    @OneToMany(mappedBy = "notice", fetch = FetchType.EAGER)
+//    @ToString.Exclude
+//    private Collection<File> fileinfo;
     public void update(String name,String content, String recruit, String active, String company, String target, String area, String websiteurl, String category){
         this.name= name;
         this.content= content;

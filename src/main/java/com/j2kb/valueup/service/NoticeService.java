@@ -1,8 +1,11 @@
 package com.j2kb.valueup.service;
 
+import com.j2kb.valueup.domain.Image.File;
+import com.j2kb.valueup.domain.Image.FileResponseDTO;
 import com.j2kb.valueup.domain.Notice.Notice;
 import com.j2kb.valueup.domain.Notice.NoticeRequestDTO;
 import com.j2kb.valueup.domain.Notice.NoticeResponseDTO;
+import com.j2kb.valueup.repository.FileRepository;
 import com.j2kb.valueup.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
 public class NoticeService {
 
     private final NoticeRepository noticeRepository;
+    private final FileRepository fileRepository;
 
     // 공고 등록
     @Transactional
@@ -32,6 +36,7 @@ public class NoticeService {
         List<Notice> list = noticeRepository.findAll(sort);
         return list.stream().map(NoticeResponseDTO::new).collect(Collectors.toList());
     }
+
     
     // 공고 리스트 번호로 조회
     public NoticeResponseDTO findById(final Long no){
