@@ -1,11 +1,13 @@
 package com.j2kb.valueup.domain.Community;
 
 //import com.j2kb.valueup.domain.Comment.Comment;
+import com.j2kb.valueup.domain.Comment.Comment;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Builder
@@ -24,8 +26,8 @@ public class Community {
     private LocalDateTime createdDate = LocalDateTime.now();
     private LocalDateTime modifiedDate;
     private String category;
-//    @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-//    private List<Comment> comments;
+    @OneToMany(mappedBy = "community_no", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<Comment> comments;
 
     public void update(String name, String content, String writer, String category){
         this.name = name;

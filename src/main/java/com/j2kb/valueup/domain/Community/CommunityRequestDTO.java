@@ -13,7 +13,6 @@ public class CommunityRequestDTO {
     private String writer;
     private String category;
     private LocalDateTime createDate = LocalDateTime.now();
-    private char deleteYn;
 
     public Community toEntity(){
         return Community.builder()
